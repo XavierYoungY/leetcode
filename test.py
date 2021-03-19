@@ -1,27 +1,38 @@
 # -*- coding:utf-8 -*-
 class Solution:
-    # 返回对应char
-    def __init__(self):
-        self.s=[]
-        self.dict={}
-    def FirstAppearingOnce(self):
+    def FindContinuousSequence(self, tsum):
         # write code here
-        for char in self.s:
-            if self.dict[char]==1:
-                return char
-        return '#'
-    def Insert(self, char):
-        # write code here
-        self.s.append(char)
-        if char in self.dict:
-            self.dict[char]+=1
-        else:
-            self.dict[char]=1
+        def xx(l,s):
+            n=(s+0.5*l**2+0.5*l)/(l+1)
+            if n<s and n==int(n) and n-l>0:
+                return int(n)
+            return 0
             
+        mid=tsum//2+1
+        l,n=1,1
+        out=[]
+        for l in range(mid):
+            n=xx(l,tsum)
+            if n:
+                out.append([l,n])
             
+                
+        if not len(out):
+            return []
+        res=[]
+        for i in out:
+            l=i[0]
+            n=i[1]
+            res.append(list(range(n-l,n+1)))
             
-if __name__ == '__main__':
-    s=Solution()
-    s.Insert("google")
-    s.FirstAppearingOnce()
+        return sorted(res, key=lambda i:i[0])
     
+    
+s=Solution()
+a=s.FindContinuousSequence(100)
+print(a)
+    
+    
+    
+    
+              
